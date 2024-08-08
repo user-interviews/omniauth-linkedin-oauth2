@@ -8,7 +8,8 @@ module OmniAuth
       option :client_options, {
         :site => 'https://api.linkedin.com',
         :authorize_url => 'https://www.linkedin.com/oauth/v2/authorization?response_type=code',
-        :token_url => 'https://www.linkedin.com/oauth/v2/accessToken'
+        :token_url => 'https://www.linkedin.com/oauth/v2/accessToken',
+        :auth_scheme => 'request_body'
       }
 
       option :scope, 'r_liteprofile r_emailaddress'
@@ -130,7 +131,7 @@ module OmniAuth
       def profile_endpoint
         "/v2/me?projection=(#{ fields.join(',') })"
       end
-      
+
       def token_params
         super.tap do |params|
           params.client_secret = options.client_secret
